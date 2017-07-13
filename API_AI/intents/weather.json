@@ -1,0 +1,106 @@
+{
+  "userSays": [
+    {
+      "id": "3e039a51-67eb-48d1-a9f5-a029579e5a9e",
+      "data": [
+        {
+          "text": "Weather forecast in "
+        },
+        {
+          "text": "San Francisco",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "fff46e58-ee0a-40ba-b909-a5d06d13121c",
+      "data": [
+        {
+          "text": "Weather"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "7c3ce7e0-317e-4967-be5c-4a3363afbf37",
+      "data": [
+        {
+          "text": "What is the weather like"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "4a599900-39c4-4e67-89fd-418a90e014e4",
+      "data": [
+        {
+          "text": "Weather forecast"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "ad966abb-91c8-4bb5-82d2-376e85b12806",
+      "data": [
+        {
+          "text": "What is the weather supposed to be in New York"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    }
+  ],
+  "id": "908864ef-d243-45ee-a1e9-0f812c71caa0",
+  "name": "weather",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "GetWeather",
+      "affectedContexts": [
+        {
+          "name": "GetWeather",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "required": true,
+          "dataType": "@sys.geo-city",
+          "name": "geo-city",
+          "value": "$geo-city",
+          "prompts": [
+            "For what city would you like to know the weather?",
+            "Please, tell me what city are you asking about",
+            "Name a city please!"
+          ],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": [
+            "Sorry I don\u0027t know the weather",
+            "I don\u0027t know the weather in $geo-city but I hope it\u0027s nice!"
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {}
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": []
+}

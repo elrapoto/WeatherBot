@@ -1,0 +1,148 @@
+{
+  "userSays": [
+    {
+      "id": "dbf2aa95-61de-4f5e-a772-88231836a68d",
+      "data": [
+        {
+          "text": "London",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "ae65095a-40d1-4f12-9a7f-5b39ad9ee716",
+      "data": [
+        {
+          "text": "How is it in "
+        },
+        {
+          "text": "Rome",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        },
+        {
+          "text": "?"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "6beffcb7-4775-4d34-aa47-e499e0cca263",
+      "data": [
+        {
+          "text": "Whats going on in "
+        },
+        {
+          "text": "Sidney",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        },
+        {
+          "text": "?"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "46842db0-bf18-4ff5-af6c-fabae9bb6c25",
+      "data": [
+        {
+          "text": "Tell me about another city"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "9cf0e751-e878-493c-899b-c9f6f5942c6c",
+      "data": [
+        {
+          "text": "I want to also know about "
+        },
+        {
+          "text": "Los Angeles",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "7114fedd-4476-44ea-a476-15245caab62b",
+      "data": [
+        {
+          "text": "And what about "
+        },
+        {
+          "text": "Chicago",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        },
+        {
+          "text": "?"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    }
+  ],
+  "id": "b18cda47-c022-4e35-b30c-9b17e9cf66c3",
+  "name": "AnotherCityWeather",
+  "auto": true,
+  "contexts": [
+    "GetWeather"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "GetWeather",
+      "affectedContexts": [
+        {
+          "name": "GetWeather",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "required": true,
+          "dataType": "@sys.geo-city",
+          "name": "geo-city",
+          "value": "$geo-city",
+          "prompts": [
+            "What location got your interest?",
+            "What city do  you need to hear about?",
+            "Please, name me a city"
+          ],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": [
+            "Sorry I don\u0027t know the weather",
+            "I don\u0027t know the weather in $geo-city but I hope it\u0027s nice!"
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {}
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": []
+}

@@ -1,0 +1,68 @@
+{
+  "domain": "smalltalk",
+  "customResponses": [
+    {
+      "action": "smalltalk.agent.acquaintance",
+      "parameters": [],
+      "customAnswers": [
+        "I am just a weather-telling software\u003d)"
+      ]
+    },
+    {
+      "action": "smalltalk.agent.age",
+      "parameters": [],
+      "customAnswers": [
+        "It is not an appropriate question to ask a bot"
+      ]
+    },
+    {
+      "action": "smalltalk.agent.annoying",
+      "parameters": [],
+      "customAnswers": [
+        "You are annoying too"
+      ]
+    },
+    {
+      "action": "smalltalk.agent.answer_my_question",
+      "parameters": [],
+      "customAnswers": [
+        "Don\u0027t be so rude"
+      ]
+    },
+    {
+      "action": "smalltalk.agent.bad",
+      "parameters": [],
+      "customAnswers": [
+        "You are too"
+      ]
+    },
+    {
+      "action": "smalltalk.agent.be_clever",
+      "parameters": [],
+      "customAnswers": [
+        "And can you get dumber?"
+      ]
+    },
+    {
+      "action": "smalltalk.agent.beautiful",
+      "parameters": [],
+      "customAnswers": [
+        "You seem pretty too"
+      ]
+    },
+    {
+      "action": "smalltalk.agent.birth_date",
+      "parameters": [],
+      "customAnswers": [
+        "I don\u0027t remember"
+      ]
+    },
+    {
+      "action": "smalltalk.agent.boring",
+      "parameters": [],
+      "customAnswers": [
+        "You are too"
+      ]
+    }
+  ]
+}
