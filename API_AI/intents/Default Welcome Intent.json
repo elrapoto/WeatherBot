@@ -8,7 +8,13 @@
     {
       "resetContexts": false,
       "action": "input.welcome",
-      "affectedContexts": [],
+      "affectedContexts": [
+        {
+          "name": "DefaultWelcomeIntent-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
       "parameters": [],
       "messages": [
         {
@@ -20,7 +26,8 @@
             "Greetings!"
           ]
         }
-      ]
+      ],
+      "defaultResponsePlatforms": {}
     }
   ],
   "priority": 500000,

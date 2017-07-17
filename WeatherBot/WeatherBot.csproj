@@ -115,14 +115,12 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="Controllers\WeatherAgentController.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ApiConnectorsContainer.cs" />
-    <Compile Include="WeatherServiceResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
