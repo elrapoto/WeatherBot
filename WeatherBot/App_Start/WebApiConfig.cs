@@ -11,6 +11,10 @@ namespace WeatherBot
     {
         public static void Register(HttpConfiguration config)
         {
+            //Bot library settings
+            BotLibrary.Conversation.onNewUpdateAsync += BusinessLogic.NewUpdateHandler;
+            BotLibrary.Conversation.onStartConversation += BusinessLogic.OnStart;
+
             // Json settings
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

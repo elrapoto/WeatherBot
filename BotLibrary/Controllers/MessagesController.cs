@@ -4,11 +4,8 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
-using ApiAiSDK;
-using Microsoft.IdentityModel.Protocols;
-using System.Configuration;
 
-namespace WeatherBot
+namespace BotLibrary.Controllers
 {
     [BotAuthentication]
     public class MessagesController : ApiController
@@ -21,7 +18,7 @@ namespace WeatherBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());                                
+                await Microsoft.Bot.Builder.Dialogs.Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
             }
             else
             {
