@@ -10,24 +10,22 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using IntellectLibrary;
 using System.Web;
 
 namespace WeatherBot
 {
     public class BusinessLogic
-    //VERY UGLY BUT SOMEHOW IT WORKS
     {
-        public static List<ApiAi> apiList = new List<ApiAi>();
-        public static ConcurrentDictionary<Tuple<string, string, string>, Tuple<ApiAi, bool>> apiDictionary = new ConcurrentDictionary<Tuple<string, string, string>, Tuple<ApiAi, bool>>();
+        public static ConcurrentDictionary<Tuple<string, string, string>, Tuple<int, bool>> apiDictionary = new ConcurrentDictionary<Tuple<string, string, string>, Tuple<int, bool>>();
         static string weatherServiceAPIKey = ConfigurationManager.AppSettings["WeatherServiceAPIKey"];
         
 
         public static void OnStart(Conversation conversation)
-        {
-            var config = new AIConfiguration(ConfigurationManager.AppSettings["ApiAiID"], SupportedLanguage.English);
-            var aiApi = new ApiAi(config);
+        {            
+            var intellectInstance = new ApiAiIntellectInstance();
             apiDictionary.TryAdd(new Tuple<string, string, string>(conversation.Channel, conversation.Id, conversation.Platfrom),
-                new Tuple<ApiAi, bool>(aiApi, true));
+                new Tuple<int, bool>(intellectInstance.Idx, true));            
         }
 
         public static async Task<Update[]> NewUpdateHandler(Conversation conversation, Update update)
@@ -35,23 +33,22 @@ namespace WeatherBot
             List<Update> result = null;
             if (update.Text!=null && update.Text?.Length>0)
             {
-                ApiAi apiAi;
-                Tuple<ApiAi, bool> dictionaryValue;
+                IntellectInstanse intellectInstance;
+                Tuple<int, bool> dictionaryValue;
                 
                 //Getting ApiAi object to call the service and getting a bool value which indicates wether it is the first  message in the conversation
                 try
                 {
                     dictionaryValue = apiDictionary[new Tuple<string, string, string>(conversation.Channel, conversation.Id,
                     conversation.Platfrom)];
-                    apiAi = dictionaryValue.Item1;
+                    intellectInstance = IntellectInstanse.GetInstance(dictionaryValue.Item1);
                 }
                 catch
                 {
-                    var config = new AIConfiguration(ConfigurationManager.AppSettings["ApiAiID"], SupportedLanguage.English);
-                    apiAi = new ApiAi(config);
-                    dictionaryValue = new Tuple<ApiAi, bool>(apiAi, true);
-                    apiDictionary.TryAdd(new Tuple<string, string, string>(conversation.Channel, conversation.Id, conversation.Platfrom),
-                       dictionaryValue);
+                    OnStart(conversation);
+                    dictionaryValue = apiDictionary[new Tuple<string, string, string>(conversation.Channel, conversation.Id,
+                    conversation.Platfrom)];
+                    intellectInstance = IntellectInstanse.GetInstance(dictionaryValue.Item1);
                 }
                 
                 //check wether its the first message
@@ -59,20 +56,20 @@ namespace WeatherBot
                 {
                     result = new List<Update>(SayHello());
                     apiDictionary[new Tuple<string, string, string>(conversation.Channel, conversation.Id,
-                    conversation.Platfrom)] = new Tuple<ApiAi, bool>(apiAi, false);
+                    conversation.Platfrom)] = new Tuple<int, bool>(intellectInstance.Idx, false);
                 }
                 else
                 {
                     result = new List<Update>();
                 }                
 
-                var response = apiAi.TextRequest(update.Text);
-                string responseText = response.Result.Fulfillment.Speech ?? "";
+                var response = intellectInstance.GetResponse(update.Text);
+                string responseText = response.Speech ?? "";
 
-                if (response.Result.Action == "GetWeather" && response.Result.Parameters["geo-city"].ToString() != "")
+                if (response.Action == "GetWeather" && response.Parameters["geo-city"].ToString() != "")
                 {
                     //post weather conditions to the user
-                    result.Insert(result.Count, await GetWeatherAsync(response.Result.Parameters["geo-city"].ToString()));
+                    result.Insert(result.Count, await GetWeatherAsync(response.Parameters["geo-city"].ToString()));
                 }
                 else
                 {

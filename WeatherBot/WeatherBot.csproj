@@ -131,6 +131,10 @@
       <Project>{805ab31c-a819-4598-90b3-aacb8c496b00}</Project>
       <Name>BotLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IntellectLibrary\IntellectLibrary.csproj">
+      <Project>{06941b94-15a9-43ef-8af3-626037ac4582}</Project>
+      <Name>IntellectLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

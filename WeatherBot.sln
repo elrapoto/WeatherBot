@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherBot", "WeatherBot\We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotLibrary", "BotLibrary\BotLibrary.csproj", "{805AB31C-A819-4598-90B3-AACB8C496B00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntellectLibrary", "IntellectLibrary\IntellectLibrary.csproj", "{06941B94-15A9-43EF-8AF3-626037AC4582}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{805AB31C-A819-4598-90B3-AACB8C496B00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{805AB31C-A819-4598-90B3-AACB8C496B00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{805AB31C-A819-4598-90B3-AACB8C496B00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06941B94-15A9-43EF-8AF3-626037AC4582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06941B94-15A9-43EF-8AF3-626037AC4582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06941B94-15A9-43EF-8AF3-626037AC4582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06941B94-15A9-43EF-8AF3-626037AC4582}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
