@@ -15,6 +15,7 @@ namespace WeatherBot
             //Intellect library settings
             IntellectLibrary.ApiAiIntellectInstance.clientAccessToken = ConfigurationManager.AppSettings["ApiAiID"];
             IntellectLibrary.ApiAiIntellectInstance.inputLanguage = "english";
+
             //Bot library settings
             BotLibrary.Conversation.onNewUpdateAsync += BusinessLogic.NewUpdateHandler;
             BotLibrary.Conversation.onStartConversation += BusinessLogic.OnStart;
@@ -23,11 +24,11 @@ namespace WeatherBot
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
-            JsonConvert.DefaultSettings = () => new JsonSerializerSettings()
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                Formatting = Newtonsoft.Json.Formatting.Indented,
-                NullValueHandling = NullValueHandling.Ignore,
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
             };
 
             // Web API configuration and services
@@ -36,9 +37,9 @@ namespace WeatherBot
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                "DefaultApi",
+                "api/{controller}/{id}",
+                new { id = RouteParameter.Optional }
             );
         }
     }

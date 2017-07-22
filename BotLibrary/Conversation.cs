@@ -10,7 +10,7 @@ namespace BotLibrary
     public delegate void StartConversationHandler(Conversation conversation);
 
     [Serializable]
-    public abstract class Conversation
+    public class Conversation
     {
         public string Platfrom { get; set; }
         public string Channel { get; set; }

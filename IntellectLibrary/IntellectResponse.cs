@@ -9,20 +9,10 @@ namespace IntellectLibrary
     public class IntellectResponse
     {
         public string Speech { get; private set; }
-        public String Action
+        public string Action
         {
-            get
-            {
-                if (string.IsNullOrEmpty(action))
-                {
-                    return string.Empty;
-                }
-                return action;
-            }
-            private set
-            {
-                action = value;
-            }
+            get => string.IsNullOrEmpty(action) ? string.Empty : action;
+            private set => action = value;
         }
         public Dictionary<string, object> Parameters { get; private set; }
 

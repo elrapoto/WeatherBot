@@ -30,28 +30,26 @@ namespace BotLibrary.Controllers
 
         private Activity HandleSystemMessage(Activity message)
         {
-            if (message.Type == ActivityTypes.DeleteUserData)
+            switch (message.Type)
             {
-                // Implement user deletion here
-                // If we handle user deletion, return a real message
-            }
-            else if (message.Type == ActivityTypes.ConversationUpdate)
-            {
-                // Handle conversation state changes, like members being added and removed
-                // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
-                // Not available in all channels
-            }
-            else if (message.Type == ActivityTypes.ContactRelationUpdate)
-            {
-                // Handle add/remove from contact lists
-                // Activity.From + Activity.Action represent what happened
-            }
-            else if (message.Type == ActivityTypes.Typing)
-            {
-                // Handle knowing tha the user is typing
-            }
-            else if (message.Type == ActivityTypes.Ping)
-            {
+                case ActivityTypes.DeleteUserData:
+                    // Implement user deletion here
+                    // If we handle user deletion, return a real message
+                    break;
+                case ActivityTypes.ConversationUpdate:
+                    // Handle conversation state changes, like members being added and removed
+                    // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
+                    // Not available in all channels
+                    break;
+                case ActivityTypes.ContactRelationUpdate:
+                    // Handle add/remove from contact lists
+                    // Activity.From + Activity.Action represent what happened
+                    break;
+                case ActivityTypes.Typing:
+                    // Handle knowing tha the user is typing
+                    break;
+                case ActivityTypes.Ping:
+                    break;
             }
 
             return null;

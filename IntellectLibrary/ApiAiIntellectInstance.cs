@@ -11,8 +11,8 @@ namespace IntellectLibrary
     {
         public static string clientAccessToken;
         public static string inputLanguage;
-        
-        ApiAi api;
+
+        private readonly ApiAi api;
 
         public ApiAiIntellectInstance(string clientAccessToken, string inputLanguage)
         {
@@ -42,7 +42,7 @@ namespace IntellectLibrary
                     break;
 
             }
-            AIConfiguration configuration = new AIConfiguration(clientAccessToken, chosenLanguage);
+            var configuration = new AIConfiguration(clientAccessToken, chosenLanguage);
             api = new ApiAi(configuration);
             AddItseldToList();
         }

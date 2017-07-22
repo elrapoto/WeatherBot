@@ -9,7 +9,7 @@ namespace IntellectLibrary
 {
     public abstract class IntellectInstanse
     {
-        private static List<IntellectInstanse> instances = new List<IntellectInstanse>();
+        private static readonly List<IntellectInstanse> instances = new List<IntellectInstanse>();
 
         public static int AddInstance(IntellectInstanse instance)
         {
@@ -27,7 +27,7 @@ namespace IntellectLibrary
             return instances[idx];
         }
 
-        abstract public IntellectResponse GetResponse(string input);
+        public abstract IntellectResponse GetResponse(string input);
 
         public int Idx { get; protected set; }        
     }

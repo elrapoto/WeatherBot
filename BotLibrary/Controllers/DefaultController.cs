@@ -12,7 +12,7 @@ namespace BotLibrary.Controllers
         // GET: api/Default
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new[] { "value1", "value2" };
         }
 
         // GET: api/Default/5

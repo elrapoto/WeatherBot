@@ -3,18 +3,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
-using BotLibrary.Implementations;
 
 namespace BotLibrary.Dialogs
 {
     [Serializable]
     public class RootDialog : IDialog<object>
     {
-        private MSConversation externalConversation;
+        private Conversation externalConversation;
 
         public Task StartAsync(IDialogContext context)
         {
-            externalConversation = new MSConversation(this)
+            externalConversation = new Conversation()
             {
                 Platfrom = "Microsoft Bot Framework",
                 Channel = context.Activity.ChannelId,
@@ -29,11 +28,11 @@ namespace BotLibrary.Dialogs
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
         {            
             var activity = await result as Activity;
-            var incomeUpdate = MSConversation.ConvertActivity(activity);
+            var incomeUpdate = ConvertActivity(activity);
 
             if(incomeUpdate !=null)
             {
-                Update[] outputedUpdates = await Conversation.onNewUpdateAsync(externalConversation, incomeUpdate);
+                var outputedUpdates = await Conversation.onNewUpdateAsync(externalConversation, incomeUpdate);
                 if (outputedUpdates != null)
                 {
                     foreach (var update in outputedUpdates)
@@ -44,6 +43,36 @@ namespace BotLibrary.Dialogs
             }            
 
             context.Wait(MessageReceivedAsync);
+        }
+
+        private static Update ConvertActivity(Activity activity)
+        {
+            try
+            {
+                Update result;
+                switch (activity.Type)
+                {
+                    case ActivityTypes.Message:
+                        result = new Update(UpdateType.Message, activity.Text);
+                        break;
+                    case ActivityTypes.Typing:
+                        result = new Update(UpdateType.Typing);
+                        break;
+                    case ActivityTypes.ConversationUpdate:
+                        result = new Update(UpdateType.ConversationUpdate);
+                        break;
+                    default:
+                        return null;
+                }
+                result.LocalTime = activity.LocalTimestamp;
+                result.UTCTime = activity.Timestamp;
+                result.From = activity.From.Id;
+                return result;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }
