@@ -17,7 +17,7 @@ namespace BotLibrary.Dialogs
             {
                 Platfrom = "Microsoft Bot Framework",
                 Channel = context.Activity.ChannelId,
-                Id = context.Activity.Conversation.Id
+                Id = context.Activity.From.Id
             };
             Conversation.onStartConversation?.Invoke(externalConversation);
             context.Wait(MessageReceivedAsync);
