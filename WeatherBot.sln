@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BotLibrary", "BotLibrary\Bo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntellectLibrary", "IntellectLibrary\IntellectLibrary.csproj", "{06941B94-15A9-43EF-8AF3-626037AC4582}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseLibrary", "DatabaseLibrary\DatabaseLibrary.csproj", "{C760B624-9420-4F0C-8B72-7E6EBBFCFCCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{06941B94-15A9-43EF-8AF3-626037AC4582}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06941B94-15A9-43EF-8AF3-626037AC4582}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06941B94-15A9-43EF-8AF3-626037AC4582}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C760B624-9420-4F0C-8B72-7E6EBBFCFCCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C760B624-9420-4F0C-8B72-7E6EBBFCFCCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C760B624-9420-4F0C-8B72-7E6EBBFCFCCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C760B624-9420-4F0C-8B72-7E6EBBFCFCCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,6 +20,13 @@ namespace WeatherBot
             BotLibrary.Conversation.onNewUpdateAsync += BusinessLogic.NewUpdateHandler;
             BotLibrary.Conversation.onStartConversation += BusinessLogic.OnStart;
 
+            //Database library settings
+            DatabaseLibrary.PostgreDbController.userId = ConfigurationManager.AppSettings["DbUser"];
+            DatabaseLibrary.PostgreDbController.password = ConfigurationManager.AppSettings["DbPassword"];
+            DatabaseLibrary.PostgreDbController.databaseName = ConfigurationManager.AppSettings["DbName"];
+            DatabaseLibrary.PostgreDbController.port = ConfigurationManager.AppSettings["DbPort"];
+            DatabaseLibrary.PostgreDbController.server = ConfigurationManager.AppSettings["DbServerAddress"];
+
             // Json settings
             config.Formatters.JsonFormatter.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
