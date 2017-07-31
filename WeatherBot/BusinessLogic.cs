@@ -19,7 +19,7 @@ namespace WeatherBot
     {
         public static ConcurrentDictionary<Tuple<string, string, string>, Tuple<int, bool>> apiDictionary = new ConcurrentDictionary<Tuple<string, string, string>, Tuple<int, bool>>();
         private static readonly string weatherServiceAPIKey = ConfigurationManager.AppSettings["WeatherServiceAPIKey"];
-        
+        private static readonly DatabaseLibrary.IDbController dbController = DatabaseLibrary.PostgreDbController.Controller;        
 
         public static void OnStart(Conversation conversation)
         {            
@@ -67,17 +67,37 @@ namespace WeatherBot
 
             var response = intellectInstance.GetResponse(update.Text);
             var responseText = response.Speech ?? "";
+            
+            switch(response.Action)
+            {
+                case "GetWeather":
+                    string city = response.Parameters["geo-city"].ToString();
+                    if (city == "")
+                    {
+                        string defaultCity = await dbController.GetDefaultCityAsync(conversation);
+                        //if there's no default city, pass API.AI message
+                        if (defaultCity == null || defaultCity == "")
+                        {                            
+                            goto default;
+                        }
+                        city = defaultCity;
+                    }
+                    //post weather conditions to the user
+                    result.Insert(result.Count, await GetWeatherAsync(city));
+                    break;
+                case "DefaultCitySetUp":
+                    city = response.Parameters["geo-city"].ToString();
+                    if (city != "")
+                    {
+                        await dbController.SetDefaultCityAsync(conversation, city);
+                    }
+                    goto default;
+                default:
+                    //post API.AI reply to the user
+                    result.Add(new Update(UpdateType.Message, responseText));
+                    break;
+            }
 
-            if (response.Action == "GetWeather" && response.Parameters["geo-city"].ToString() != "")
-            {
-                //post weather conditions to the user
-                result.Insert(result.Count, await GetWeatherAsync(response.Parameters["geo-city"].ToString()));
-            }
-            else
-            {
-                //post API.AI reply to the user
-                result.Add(new Update(UpdateType.Message, responseText));
-            }
             return result.ToArray();
         }
 
