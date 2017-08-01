@@ -1,0 +1,160 @@
+{
+  "userSays": [
+    {
+      "id": "c5e80b49-9ae3-4194-852e-fff0433d9108",
+      "data": [
+        {
+          "text": "Make "
+        },
+        {
+          "text": "New York",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": true
+        },
+        {
+          "text": " my default city"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "eadb1a42-e54e-4db9-bdc9-b8f3655ba995",
+      "data": [
+        {
+          "text": "Make "
+        },
+        {
+          "text": "St. Petersburg",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": true
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "my",
+          "meta": "@sys.ignore",
+          "userDefined": false
+        },
+        {
+          "text": " default"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "90a603ee-df16-4398-95da-03678ca0e038",
+      "data": [
+        {
+          "text": "Moscow",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        },
+        {
+          "text": " is my standard"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "d4d8f543-7db2-4fb7-96ff-3cd5a5d306da",
+      "data": [
+        {
+          "text": "I want "
+        },
+        {
+          "text": "New York",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        },
+        {
+          "text": " to be my standard choice"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "e8c64956-1c15-452e-8e27-fdd35457ad14",
+      "data": [
+        {
+          "text": "St Petersburg",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": false
+        },
+        {
+          "text": " my default city"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "436a318b-47ba-4c68-83fb-f6b9857bd340",
+      "data": [
+        {
+          "text": "Set "
+        },
+        {
+          "text": "St Petersburg",
+          "alias": "geo-city",
+          "meta": "@sys.geo-city",
+          "userDefined": true
+        },
+        {
+          "text": " as my default city"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    }
+  ],
+  "id": "d134a54c-f824-4be5-8b76-0ed9ac3a6170",
+  "name": "DefaultCitySetUp",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "DefaultCitySetUp",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "required": true,
+          "dataType": "@sys.geo-city",
+          "name": "geo-city",
+          "value": "$geo-city",
+          "prompts": [
+            "What\u0027s the city?",
+            "Please, name a city",
+            "May you name a city, please?"
+          ],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": [
+            "$geo-city is now your default city",
+            "Now, $geo-city is your default location"
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {}
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": []
+}

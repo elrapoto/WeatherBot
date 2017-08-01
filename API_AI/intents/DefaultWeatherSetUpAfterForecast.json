@@ -1,0 +1,109 @@
+{
+  "userSays": [
+    {
+      "id": "79294aee-5c08-4ac2-84e1-78abad061496",
+      "data": [
+        {
+          "text": "Make it a default location for me"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "43ff4041-eb30-4f1d-bca1-a8a3af182930",
+      "data": [
+        {
+          "text": "Make it a standard city for me"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "b3a0e4fc-5fd0-4a2c-97a9-3776ac4fcd2f",
+      "data": [
+        {
+          "text": "Set it as a standard city"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "99afe815-2b94-449a-a0b3-139d36b20251",
+      "data": [
+        {
+          "text": "Set it as standard city"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "6a2da50b-9250-4e72-9b19-469ccdce1189",
+      "data": [
+        {
+          "text": "Set it as standard location"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "33a4c0c0-0d55-4803-90fe-d07c6b5a7bef",
+      "data": [
+        {
+          "text": "Make it a default"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "f4a34325-6398-4d0a-bbb2-4040f772eeab",
+      "data": [
+        {
+          "text": "Set it as default"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    }
+  ],
+  "id": "367207f8-cb64-4d30-a8ac-0c0fbf5c68ee",
+  "name": "DefaultWeatherSetUpAfterForecast",
+  "auto": true,
+  "contexts": [
+    "GetWeather"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "DefaultCitySetUp",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "dataType": "@sys.geo-city",
+          "name": "geo-city",
+          "value": "#GetWeather.geo-city"
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": [
+            "$geo-city is now your default city",
+            "Now, $geo-city is your default location"
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {}
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": []
+}
