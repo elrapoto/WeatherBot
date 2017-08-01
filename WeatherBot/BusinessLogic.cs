@@ -81,6 +81,7 @@ namespace WeatherBot
                             goto default;
                         }
                         city = defaultCity;
+                        intellectInstance.GetResponse(defaultCity);
                     }
                     //post weather conditions to the user
                     result.Insert(result.Count, await GetWeatherAsync(city));
