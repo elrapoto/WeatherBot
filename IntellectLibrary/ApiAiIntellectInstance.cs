@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace IntellectLibrary
 {
+    /// <summary>
+    /// Describes objects for communicating with API.AI service
+    /// </summary>
     public class ApiAiIntellectInstance: IntellectInstanse
     {
         public static string clientAccessToken;

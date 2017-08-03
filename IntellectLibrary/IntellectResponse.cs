@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace IntellectLibrary
 {
+    /// <summary>
+    /// Describes a responce from natural language proccessing services
+    /// </summary>
     public class IntellectResponse
     {
         public string Speech { get; private set; }

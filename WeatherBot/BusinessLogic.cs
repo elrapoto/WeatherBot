@@ -34,7 +34,7 @@ namespace WeatherBot
             if (update?.Text == null || update.Text?.Length == 0)
                 return null;
 
-            List<Update> result;
+            List<Update> resultingMessages = new List<Update>();
             IntellectInstanse intellectInstance;
             Tuple<int, bool> dictionaryValue;
 
@@ -53,21 +53,17 @@ namespace WeatherBot
                 intellectInstance = IntellectInstanse.GetInstance(dictionaryValue.Item1);
             }
 
-            //check wether its the first message
+            //check wether its the first message and if so - add greeting messages to the output and insert the data into the apiDictionary
             if (dictionaryValue.Item2)
             {
-                result = new List<Update>(SayHello());
+                resultingMessages.InsertRange(0, GetGreetingMessages());
                 apiDictionary[new Tuple<string, string, string>(conversation.Channel, conversation.Id,
                 conversation.Platfrom)] = new Tuple<int, bool>(intellectInstance.Idx, false);
             }
-            else
-            {
-                result = new List<Update>();
-            }
 
-            var response = intellectInstance.GetResponse(update.Text);
-            var responseText = response.Speech ?? "";
+            var response = intellectInstance.GetResponse(update.Text);            
             
+            //genarate a reply
             switch(response.Action)
             {
                 case "GetWeather":
@@ -75,6 +71,7 @@ namespace WeatherBot
                     if (city == "")
                     {
                         string defaultCity = await dbController.GetDefaultCityAsync(conversation);
+
                         //if there's no default city, pass API.AI message
                         if (defaultCity == null || defaultCity == "")
                         {                            
@@ -84,7 +81,7 @@ namespace WeatherBot
                         intellectInstance.GetResponse(defaultCity);
                     }
                     //post weather conditions to the user
-                    result.Insert(result.Count, await GetWeatherAsync(city));
+                    resultingMessages.Insert(resultingMessages.Count, await GetWeatherAsync(city));
                     break;
                 case "DefaultCitySetUp":
                     city = response.Parameters["geo-city"].ToString();
@@ -95,11 +92,11 @@ namespace WeatherBot
                     goto default;
                 default:
                     //post API.AI reply to the user
-                    result.Add(new Update(UpdateType.Message, responseText));
+                    resultingMessages.Add(new Update(UpdateType.Message, response.Speech ?? ""));
                     break;
             }
 
-            return result.ToArray();
+            return resultingMessages.ToArray();
         }
 
         private static async Task<Update> GetWeatherAsync(string city)
@@ -131,7 +128,7 @@ namespace WeatherBot
             }           
         }
 
-        private static Update[] SayHello()
+        private static Update[] GetGreetingMessages()
         {
             var result = new List<Update>
             {

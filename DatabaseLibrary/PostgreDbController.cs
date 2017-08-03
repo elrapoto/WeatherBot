@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DatabaseLibrary
 {
+    /// <summary>
+    /// A singleton class for accessing postgre database
+    /// </summary>
     public class PostgreDbController: IDbController
     {
         public static string userId;

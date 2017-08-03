@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace IntellectLibrary
 {
+    /// <summary>
+    /// A parent class for any classes describing objects for communicating with natural language services.
+    /// Also provides methods for accessing those objects.
+    /// </summary>
     public abstract class IntellectInstanse
     {
         private static readonly List<IntellectInstanse> instances = new List<IntellectInstanse>();
