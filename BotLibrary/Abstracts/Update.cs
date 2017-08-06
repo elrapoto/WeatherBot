@@ -15,6 +15,7 @@ namespace BotLibrary
         public DateTime? UTCTime { get; set; }
         public DateTimeOffset? LocalTime { get; set; }
         public string From { get; set; }
+        public GeoLocation Location { get; set; }
 
         public Update(UpdateType type)
         {

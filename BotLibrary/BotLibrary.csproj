@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstracts\GeoLocation.cs" />
     <Compile Include="Abstracts\Update.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
