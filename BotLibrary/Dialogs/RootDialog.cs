@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using Newtonsoft.Json.Linq;
 
 namespace BotLibrary.Dialogs
 {
@@ -45,6 +46,11 @@ namespace BotLibrary.Dialogs
             context.Wait(MessageReceivedAsync);
         }
 
+        /// <summary>
+        /// Converts Bot Framework activity to the Update object.
+        /// </summary>
+        /// <param name="activity"></param>
+        /// <returns></returns>
         private static Update ConvertActivity(Activity activity)
         {
             try
@@ -54,6 +60,8 @@ namespace BotLibrary.Dialogs
                 {
                     case ActivityTypes.Message:
                         result = new Update(UpdateType.Message, activity.Text);
+                        if (activity.ChannelId == ChannelIds.Telegram)
+                            result.Location = ConvertTelegramLocation(activity.ChannelData);
                         break;
                     case ActivityTypes.Typing:
                         result = new Update(UpdateType.Typing);
@@ -68,6 +76,27 @@ namespace BotLibrary.Dialogs
                 result.UTCTime = activity.Timestamp;
                 result.From = activity.From.Id;
                 return result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Extracts location data from the ChannelData of a Telegram Activity
+        /// </summary>
+        /// <param name="channelData"></param>
+        /// <returns></returns>
+        private static GeoLocation ConvertTelegramLocation(object channelData)
+        {
+            try
+            {
+                var json = channelData as JToken;
+                var locationJson = json?["message"]["location"];
+                if (locationJson == null) return null;
+                return
+                    new GeoLocation(locationJson["latitude"].ToString(), locationJson["longitude"].ToString());
             }
             catch
             {
