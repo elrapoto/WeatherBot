@@ -1,6 +1,26 @@
 {
   "userSays": [
     {
+      "id": "b0a7cef2-be4a-4707-b721-3e6af3c6b9ff",
+      "data": [
+        {
+          "text": "How is the weather?"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "00c17ea7-1288-447e-8847-f4d584a64f72",
+      "data": [
+        {
+          "text": "Show me the weather"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
       "id": "3e039a51-67eb-48d1-a9f5-a029579e5a9e",
       "data": [
         {
@@ -69,7 +89,12 @@
         {
           "name": "GetWeather",
           "parameters": {},
-          "lifespan": 5
+          "lifespan": 2
+        },
+        {
+          "name": "SetCityDefault",
+          "parameters": {},
+          "lifespan": 2
         }
       ],
       "parameters": [

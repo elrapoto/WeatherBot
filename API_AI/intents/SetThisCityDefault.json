@@ -1,92 +1,102 @@
 {
   "userSays": [
     {
-      "id": "79294aee-5c08-4ac2-84e1-78abad061496",
+      "id": "26c1400b-1a0c-4188-a157-96bc7ea4235b",
       "data": [
         {
-          "text": "Make it a default location for me"
+          "text": "set as default"
         }
       ],
       "isTemplate": false,
       "count": 0
     },
     {
-      "id": "43ff4041-eb30-4f1d-bca1-a8a3af182930",
+      "id": "1046fcb5-d063-4b92-86c6-2f4b94f8d30d",
       "data": [
         {
-          "text": "Make it a standard city for me"
+          "text": "make it default"
         }
       ],
       "isTemplate": false,
       "count": 0
     },
     {
-      "id": "b3a0e4fc-5fd0-4a2c-97a9-3776ac4fcd2f",
+      "id": "4e2528db-7d25-4764-8424-4c6aa1dadb95",
       "data": [
         {
-          "text": "Set it as a standard city"
+          "text": "Set it as my default city"
         }
       ],
       "isTemplate": false,
       "count": 0
     },
     {
-      "id": "99afe815-2b94-449a-a0b3-139d36b20251",
+      "id": "c9f8ea43-2868-4d8d-aa0b-310976777c1e",
       "data": [
         {
-          "text": "Set it as standard city"
+          "text": "make it my standard"
         }
       ],
       "isTemplate": false,
       "count": 0
     },
     {
-      "id": "6a2da50b-9250-4e72-9b19-469ccdce1189",
+      "id": "66f86a81-2418-4789-b1df-30b23008d06d",
       "data": [
         {
-          "text": "Set it as standard location"
+          "text": "Make it default city"
         }
       ],
       "isTemplate": false,
       "count": 0
     },
     {
-      "id": "33a4c0c0-0d55-4803-90fe-d07c6b5a7bef",
+      "id": "77e9557f-cf8a-4a59-9725-5863e16c4b33",
       "data": [
         {
-          "text": "Make it a default"
+          "text": "Set it as default for me"
         }
       ],
       "isTemplate": false,
       "count": 0
     },
     {
-      "id": "f4a34325-6398-4d0a-bbb2-4040f772eeab",
+      "id": "bfb1c68a-24f1-41dd-81ae-6a27b67a3f55",
       "data": [
         {
-          "text": "Set it as default"
+          "text": "Set it as my default location"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "a86e464a-84fb-43f7-b1aa-c328ca641146",
+      "data": [
+        {
+          "text": "Make it my default"
         }
       ],
       "isTemplate": false,
       "count": 0
     }
   ],
-  "id": "367207f8-cb64-4d30-a8ac-0c0fbf5c68ee",
-  "name": "DefaultWeatherSetUpAfterForecast",
+  "id": "b46ed899-ec00-4b10-94f8-c9f5c80ea6ca",
+  "name": "SetThisCityDefault",
   "auto": true,
   "contexts": [
-    "GetWeather"
+    "SetCityDefault"
   ],
   "responses": [
     {
-      "resetContexts": false,
+      "resetContexts": true,
       "action": "DefaultCitySetUp",
       "affectedContexts": [],
       "parameters": [
         {
-          "dataType": "@sys.geo-city",
+          "required": false,
           "name": "geo-city",
-          "value": "#GetWeather.geo-city"
+          "value": "#SetCityDefault.geo-city"
         }
       ],
       "messages": [

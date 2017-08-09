@@ -111,7 +111,12 @@
         {
           "name": "GetWeather",
           "parameters": {},
-          "lifespan": 5
+          "lifespan": 2
+        },
+        {
+          "name": "SetCityDefault",
+          "parameters": {},
+          "lifespan": 2
         }
       ],
       "parameters": [

@@ -26,7 +26,7 @@
     "headers": {
       "": ""
     },
-    "available": true,
+    "available": false,
     "useForDomains": false
   },
   "isPrivate": true,

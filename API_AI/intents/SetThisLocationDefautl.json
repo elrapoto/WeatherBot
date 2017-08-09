@@ -1,0 +1,127 @@
+{
+  "userSays": [
+    {
+      "id": "70153a64-78ac-4b5b-ae8d-d96cf268508e",
+      "data": [
+        {
+          "text": "I want it to be my standard location"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "f5ae5370-913c-401f-867d-e9aa31bb4094",
+      "data": [
+        {
+          "text": "Make it my default location"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "d7e20748-9667-4c71-a050-de6f12b97b72",
+      "data": [
+        {
+          "text": "Let it be my standard location"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "a5c3713d-b273-4479-897c-2ad4cc85a9e1",
+      "data": [
+        {
+          "text": "I want it to be my standard"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "3135ba89-6cac-45f3-a134-73a30239d970",
+      "data": [
+        {
+          "text": "I want it to be my default"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "e034e23f-ffad-45fb-a899-bf2a2795f3cb",
+      "data": [
+        {
+          "text": "Let it be my default"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "d8b0434c-4f17-4745-b7ad-45951162d404",
+      "data": [
+        {
+          "text": "Make it my standard"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "135e7f4a-918a-4c18-8b73-b69848fc1a3a",
+      "data": [
+        {
+          "text": "Make it my default"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    }
+  ],
+  "id": "e716ba38-e0eb-49b8-8ec3-97b4cff3c24d",
+  "name": "SetThisLocationDefautl",
+  "auto": true,
+  "contexts": [
+    "SetLocationDefault"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "DefaultLocationSetUp",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "required": true,
+          "dataType": "@sys.ordinal",
+          "name": "lat",
+          "value": "#SetLocationDefault.lat"
+        },
+        {
+          "required": true,
+          "dataType": "@sys.ordinal",
+          "name": "lon",
+          "value": "#SetLocationDefault.lon"
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": [
+            "Now it is your default location!",
+            "OK, your location is set up.",
+            "Standard location is set up."
+          ]
+        }
+      ],
+      "defaultResponsePlatforms": {}
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": []
+}

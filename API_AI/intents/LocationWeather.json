@@ -1,0 +1,175 @@
+{
+  "userSays": [
+    {
+      "id": "6ed8e100-8d75-454f-b5a4-0453da91d500",
+      "data": [
+        {
+          "text": "Recieved location lat:"
+        },
+        {
+          "text": "98.759018",
+          "alias": "lat",
+          "meta": "@sys.ordinal",
+          "userDefined": false
+        },
+        {
+          "text": ", lon:"
+        },
+        {
+          "text": "-23.3231006",
+          "alias": "lon",
+          "meta": "@sys.ordinal",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "2d78d6cc-8429-4dec-8fdd-512437a40f62",
+      "data": [
+        {
+          "text": "Recieved location lat:"
+        },
+        {
+          "text": "-98.759018",
+          "alias": "lat",
+          "meta": "@sys.ordinal",
+          "userDefined": false
+        },
+        {
+          "text": ", lon:"
+        },
+        {
+          "text": "23.3231006",
+          "alias": "lon",
+          "meta": "@sys.ordinal",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "7cfc30ff-cc0d-421e-9b03-c7a8f99fc30a",
+      "data": [
+        {
+          "text": "Recieved location lat:"
+        },
+        {
+          "text": "98.759018",
+          "alias": "lat",
+          "meta": "@sys.ordinal",
+          "userDefined": false
+        },
+        {
+          "text": ", lon:"
+        },
+        {
+          "text": "23.3231006",
+          "alias": "lon",
+          "meta": "@sys.ordinal",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "96c9ec54-e749-4103-bba4-db3d9779a2b1",
+      "data": [
+        {
+          "text": "Recieved location lat:"
+        },
+        {
+          "text": "48.759018",
+          "alias": "lat",
+          "meta": "@sys.ordinal",
+          "userDefined": true
+        },
+        {
+          "text": ", lon:"
+        },
+        {
+          "text": "2.531006",
+          "alias": "lon",
+          "meta": "@sys.ordinal",
+          "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "6a3d30f2-5c11-4fbf-b79d-cba90d48795a",
+      "data": [
+        {
+          "text": "Recieved location lat:"
+        },
+        {
+          "text": "40.71",
+          "alias": "lat",
+          "meta": "@sys.ordinal",
+          "userDefined": true
+        },
+        {
+          "text": ", lon:"
+        },
+        {
+          "text": "-73.96",
+          "alias": "lon",
+          "meta": "@sys.ordinal",
+          "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    }
+  ],
+  "id": "86030602-db3f-47f1-9888-3bc08e7a02f8",
+  "name": "LocationWeather",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "GetWeather",
+      "affectedContexts": [
+        {
+          "name": "SetLocationDefault",
+          "parameters": {},
+          "lifespan": 1
+        }
+      ],
+      "parameters": [
+        {
+          "required": false,
+          "dataType": "@sys.ordinal",
+          "name": "lat",
+          "value": "$lat",
+          "prompts": [],
+          "isList": false
+        },
+        {
+          "required": false,
+          "dataType": "@sys.ordinal",
+          "name": "lon",
+          "value": "$lon",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {}
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": []
+}
