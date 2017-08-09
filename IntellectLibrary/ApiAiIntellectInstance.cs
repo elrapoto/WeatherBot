@@ -47,6 +47,7 @@ namespace IntellectLibrary
             }
             var configuration = new AIConfiguration(clientAccessToken, chosenLanguage);
             api = new ApiAi(configuration);
+            
             AddItseldToList();
         }
 

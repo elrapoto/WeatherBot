@@ -12,6 +12,7 @@ using System.Net;
 using System.Threading.Tasks;
 using IntellectLibrary;
 using System.Web;
+using System.Text.RegularExpressions;
 
 namespace WeatherBot
 {
@@ -30,10 +31,6 @@ namespace WeatherBot
 
         public static async Task<Update[]> NewUpdateHandler(Conversation conversation, Update update)
         {
-            //check wether message is empty
-            if (update?.Text == null || update.Text?.Length == 0)
-                return null;
-
             List<Update> resultingMessages = new List<Update>();
             IntellectInstanse intellectInstance;
             Tuple<int, bool> dictionaryValue;
@@ -61,50 +58,154 @@ namespace WeatherBot
                 conversation.Platfrom)] = new Tuple<int, bool>(intellectInstance.Idx, false);
             }
 
-            var response = intellectInstance.GetResponse(update.Text);            
-            
+            //create response to the text inside the message
+            if (update?.Text != null && update.Text?.Length != 0)
+                resultingMessages.AddRange(await TextUpdateHandler(conversation, update, intellectInstance));
+
+            //create response to the location inside the message
+            if (update?.Location!=null)
+                resultingMessages.AddRange(await LocationUpdateHandler(conversation, update, intellectInstance));
+
+            return resultingMessages.ToArray();
+        }
+
+        /// <summary>
+        /// Generates a response for an Update with text.
+        /// </summary>
+        /// <param name="conversation"></param>
+        /// <param name="update"></param>
+        /// <param name="intellectInstance"></param>
+        /// <returns></returns>
+        public static async Task<Update[]> TextUpdateHandler(Conversation conversation, Update update, 
+            IntellectInstanse intellectInstance)
+        {
+            if (update.Text == String.Empty || update.Text == null)
+                throw new Exception("Empty update");
+
+            var intellectResponse = intellectInstance.GetResponse(update.Text);
+
             //genarate a reply
-            switch(response.Action)
+            switch (intellectResponse.Action)
             {
                 case "GetWeather":
-                    string city = response.Parameters["geo-city"].ToString();
+                    string city = intellectResponse.Parameters["geo-city"].ToString();
                     if (city == "")
                     {
+                        //getting a default city from database
                         string defaultCity = await dbController.GetDefaultCityAsync(conversation);
 
                         //if there's no default city, pass API.AI message
                         if (defaultCity == null || defaultCity == "")
-                        {                            
+                        {
                             goto default;
                         }
+
+                        //checking wether default location is set with coordinates
+                        if (Regex.IsMatch(defaultCity, ".*[0-9]+.*"))
+                        {
+                            return new Update[] 
+                                { new Update(UpdateType.Message, "Data on your default location:"),
+                                await GetLocationWeatherAsync(new GeoLocation(Regex.Match(defaultCity, "^[^\\,]+").Value,
+                                                                                    Regex.Match(defaultCity, "[^\\,]+$").Value)) };
+                        }
+                        
                         city = defaultCity;
                         intellectInstance.GetResponse(defaultCity);
                     }
                     //post weather conditions to the user
-                    resultingMessages.Insert(resultingMessages.Count, await GetWeatherAsync(city));
-                    break;
+                    return new Update[] { await GetCityWeatherAsync(city) };
+                case "DefaultLocationSetUp":
+                    string latitude = intellectResponse.Parameters["lat"].ToString();
+                    string longtidute = intellectResponse.Parameters["lon"].ToString();
+                    if (latitude != "" && longtidute != "")
+                    {
+                        await dbController.SetDefaultCityAsync(conversation, $"{latitude},{longtidute}");
+                    }                        
+                    goto default;
                 case "DefaultCitySetUp":
-                    city = response.Parameters["geo-city"].ToString();
+                    city = intellectResponse.Parameters["geo-city"].ToString();
                     if (city != "")
                     {
                         await dbController.SetDefaultCityAsync(conversation, city);
                     }
                     goto default;
                 default:
-                    //post API.AI reply to the user
-                    resultingMessages.Add(new Update(UpdateType.Message, response.Speech ?? ""));
-                    break;
-            }
-
-            return resultingMessages.ToArray();
+                    //return a reply from IntellectInstance
+                    return new Update[] {new Update(UpdateType.Message, intellectResponse.Speech ?? "")};
+            }            
         }
 
-        private static async Task<Update> GetWeatherAsync(string city)
+        /// <summary>
+        /// Generates a response for an Update with location.
+        /// </summary>
+        /// <param name="conversation"></param>
+        /// <param name="update"></param>
+        /// <param name="intellectInstance"></param>
+        /// <returns></returns>
+        public static async Task<Update[]> LocationUpdateHandler(Conversation conversation, Update update,
+            IntellectInstanse intellectInstance)
+        {
+            if (update?.Location?.Latidute == null || update?.Location?.Longitude == null)
+                throw new Exception("No location");
+
+            //setting up a correct context inside api.ai
+            var intellectResponse = 
+                intellectInstance.GetResponse($"Recieved location lat:{update.Location.Latidute}, lon:{update.Location.Longitude}");
+
+            return new Update[]{(await GetLocationWeatherAsync(update.Location))};
+        }
+
+        /// <summary>
+        /// Returns weather update for selected geolocation
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        private static async Task<Update> GetLocationWeatherAsync(GeoLocation location)
+        {
+            try
+            {
+                var weatherInfo = await GetWeatherAsync($"{location.Latidute},{location.Longitude}");
+                //Returning a resulting message        
+                return new Update(UpdateType.Message,
+                    $"It is {weatherInfo.Item1} there, {weatherInfo.Item2}°C.");
+            }
+            catch
+            {
+                return new Update(UpdateType.Message, "Sorry, the weather info is not accessible...");
+            }
+        }
+
+        /// <summary>
+        /// Returns weather update for selected  city
+        /// </summary>
+        /// <param name="city"></param>
+        /// <returns></returns>
+        private static async Task<Update> GetCityWeatherAsync(string city)
+        {
+            try
+            {
+                var weatherInfo = await GetWeatherAsync(city);
+                //Returning a resulting message        
+                return new Update(UpdateType.Message,
+                    $"It is {weatherInfo.Item1} in {city}, {weatherInfo.Item2}°C.");
+            }
+            catch
+            {
+                return new Update(UpdateType.Message, "Sorry, the weather info is not accessible...");
+            }                                       
+        }
+
+        /// <summary>
+        /// Returns weather info in Tuple (string condition, string temperature).         
+        /// </summary>
+        /// <param name="location">Either city's name: {name} or coordinates: {latidute, longtidute}</param>
+        /// <returns></returns>
+        private static async Task<Tuple<string, string>> GetWeatherAsync(string location)
         {
             try
             {
                 //Creating a request
-                var request = (HttpWebRequest)WebRequest.Create($"http://api.apixu.com/v1/current.json?key={ weatherServiceAPIKey }&q={city}");
+                var request = (HttpWebRequest)WebRequest.Create($"http://api.apixu.com/v1/current.json?key={ weatherServiceAPIKey }&q={location}");
 
                 request.Method = "GET";
                 request.Accept = "application/json";
@@ -118,13 +219,12 @@ namespace WeatherBot
                 }
                 var weatherInfo = JToken.Parse(output);
 
-                //Returning a resulting message            
-                return new Update(UpdateType.Message, 
-                    $"It is {weatherInfo["current"]["condition"]["text"].Value<string>().ToLower()} in {city}, {weatherInfo["current"]["feelslike_c"].Value<string>()}°C.");
+                return new Tuple<string, string>(weatherInfo["current"]["condition"]["text"].Value<string>().ToLower(),
+                    weatherInfo["current"]["feelslike_c"].Value<string>().ToLower());                
             }
             catch
             {
-                return new Update(UpdateType.Message, "Weather info is not accessible");
+                throw new Exception("Weather is not accessible");
             }           
         }
 
