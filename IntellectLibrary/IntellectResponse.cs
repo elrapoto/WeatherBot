@@ -18,14 +18,16 @@ namespace IntellectLibrary
             private set => action = value;
         }
         public Dictionary<string, object> Parameters { get; private set; }
+        public string Intent { get; set; }
 
         private string action;
 
-        public IntellectResponse(string speech, string action, Dictionary<string, object> parameters)
+        public IntellectResponse(string speech, string action, Dictionary<string, object> parameters, string intent)
         {
             Speech = speech;
             Action = action;
             Parameters = parameters;
+            Intent = intent;
         }
     }
 }

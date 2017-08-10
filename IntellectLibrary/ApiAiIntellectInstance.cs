@@ -66,11 +66,11 @@ namespace IntellectLibrary
         }
 
         private static IntellectResponse ConvertResponse(ApiAiSDK.Model.AIResponse aiResponse)
-        {
+        {            
             if (aiResponse == null)
                 return null;
             return new IntellectResponse(aiResponse.Result.Fulfillment.Speech, aiResponse.Result.Action,
-                aiResponse.Result.Parameters);
+                aiResponse.Result.Parameters, aiResponse.Result.Metadata.IntentName);
         }
     }
 }

@@ -152,6 +152,13 @@ namespace WeatherBot
             var intellectResponse = 
                 intellectInstance.GetResponse($"Recieved location lat:{update.Location.Latidute}, lon:{update.Location.Longitude}");
 
+            //we need to exit weather or AnotherCityWeather intent in case api.ai awaits city name
+            if (intellectResponse.Intent.ToLower() == "weather" || intellectResponse.Intent.ToLower() == "anothercityweather")
+            {
+                intellectInstance.GetResponse("Moscow");
+                intellectInstance.GetResponse($"Recieved location lat:{update.Location.Latidute}, lon:{update.Location.Longitude}");
+            }
+
             return new Update[]{(await GetLocationWeatherAsync(update.Location))};
         }
 
