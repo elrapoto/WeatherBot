@@ -259,7 +259,8 @@ namespace WeatherBot
             {
                 new Update(UpdateType.Message, "Hello"),
                 new Update(UpdateType.Message,
-                    "I am a weather bot. You could ask me about weather conditions in different cities and we could also have some small talk."),
+                    "I am a weather bot. You could ask me about weather conditions in different cities and geolocations. We could also have some small talk."),
+                new Update(UpdateType.Message, "Furthermore, you are able to set up a default city or location, so that everytime you ask for weather without specifying a locality, I'll send you info about it."),
                 new Update(UpdateType.Message, "Please, enjoy using me, cause I am great! =)")
             };
             // return our reply to the user
