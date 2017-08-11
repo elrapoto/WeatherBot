@@ -151,15 +151,33 @@ namespace WeatherBot
             //setting up a correct context inside api.ai
             var intellectResponse = 
                 intellectInstance.GetResponse($"Recieved location lat:{update.Location.Latidute}, lon:{update.Location.Longitude}");
-
-            //we need to exit weather or AnotherCityWeather intent in case api.ai awaits city name
-            if (intellectResponse.Intent.ToLower() == "weather" || intellectResponse.Intent.ToLower() == "anothercityweather")
+                        
+            switch(intellectResponse.Intent.ToLower())
             {
-                intellectInstance.GetResponse("Moscow");
-                intellectInstance.GetResponse($"Recieved location lat:{update.Location.Latidute}, lon:{update.Location.Longitude}");
+                //we need to exit weather or AnotherCityWeather intent in case api.ai awaits a city name
+                case "weather":
+                    intellectInstance.GetResponse("Moscow");
+                    intellectInstance.GetResponse($"Recieved location lat:{update.Location.Latidute}, lon:{update.Location.Longitude}");
+                    break;
+                case "anothercityweather":
+                    goto case "weather";
+
+                //set this place as default in case the intent is DefaultCitySetUp
+                case "defaultcitysetup":
+                    intellectInstance.GetResponse("Moscow");
+                    try
+                    {
+                        await dbController.SetDefaultCityAsync(conversation, $"{update.Location.Latidute},{update.Location.Longitude}");
+                    }
+                    catch
+                    {
+                        return new Update[] { new Update(UpdateType.Message, "ERROR!"),
+                            new Update(UpdateType.Message, "The location was not set up as default.")};
+                    }
+                    return new Update[] { new Update(UpdateType.Message, "The location was set up as default.")};                    
             }
 
-            return new Update[]{(await GetLocationWeatherAsync(update.Location))};
+            return new Update[] { (await GetLocationWeatherAsync(update.Location)) };
         }
 
         /// <summary>
