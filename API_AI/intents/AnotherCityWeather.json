@@ -127,8 +127,8 @@
           "value": "$geo-city",
           "prompts": [
             "What location got your interest?",
-            "What city do  you need to hear about?",
-            "Please, name me a city"
+            "What city or location do  you need to hear about?",
+            "Please, name me a city or send me a location"
           ],
           "isList": false
         }

@@ -1,6 +1,36 @@
 {
   "userSays": [
     {
+      "id": "49d3f26d-0492-47dd-be84-84e0b33bf94c",
+      "data": [
+        {
+          "text": "Make my location a standard"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "5277deb4-0a96-4cb3-84b3-fab8ef5afd70",
+      "data": [
+        {
+          "text": "Make my location a default"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
+      "id": "9eea041b-1709-4cd5-b077-438735ffa642",
+      "data": [
+        {
+          "text": "I want to set my default location"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
       "id": "c5e80b49-9ae3-4194-852e-fff0433d9108",
       "data": [
         {
@@ -133,9 +163,8 @@
           "name": "geo-city",
           "value": "$geo-city",
           "prompts": [
-            "What\u0027s the city?",
-            "Please, name a city",
-            "May you name a city, please?"
+            "Please, name a city or send me a location",
+            "May you name a city or send me a location, please?"
           ],
           "isList": false
         }
@@ -144,8 +173,9 @@
         {
           "type": 0,
           "speech": [
-            "$geo-city is now your default city",
-            "Now, $geo-city is your default location"
+            "Now, $geo-city is your default",
+            "Now, you have a new default location - $geo-city",
+            "$geo-city is your new default"
           ]
         }
       ],

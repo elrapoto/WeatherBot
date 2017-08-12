@@ -82,7 +82,7 @@
     }
   ],
   "id": "e716ba38-e0eb-49b8-8ec3-97b4cff3c24d",
-  "name": "SetThisLocationDefautl",
+  "name": "SetThisLocationDefault",
   "auto": true,
   "contexts": [
     "SetLocationDefault"

@@ -104,9 +104,9 @@
           "name": "geo-city",
           "value": "$geo-city",
           "prompts": [
-            "For what city would you like to know the weather?",
-            "Please, tell me what city are you asking about",
-            "Name a city please!"
+            "For what city or location would you like to know the weather?",
+            "Please, tell me what city are you asking about or send me a location",
+            "Name a city please... or you may send me a location :)"
           ],
           "isList": false
         }

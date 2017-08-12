@@ -1,24 +1,49 @@
 {
   "userSays": [
     {
+      "id": "df5c6e86-b7a2-4b0e-a875-3eceeffb7380",
+      "data": [
+        {
+          "text": "Recieved location lat: "
+        },
+        {
+          "text": "17.082182",
+          "alias": "lat",
+          "meta": "@sys.number",
+          "userDefined": true
+        },
+        {
+          "text": " and lon: "
+        },
+        {
+          "text": "11.361664",
+          "alias": "lon",
+          "meta": "@sys.number",
+          "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0
+    },
+    {
       "id": "6ed8e100-8d75-454f-b5a4-0453da91d500",
       "data": [
         {
-          "text": "Recieved location lat:"
+          "text": "Recieved location lat: "
         },
         {
           "text": "98.759018",
           "alias": "lat",
-          "meta": "@sys.ordinal",
+          "meta": "@sys.number",
           "userDefined": false
         },
         {
-          "text": ", lon:"
+          "text": " and lon: "
         },
         {
           "text": "-23.3231006",
           "alias": "lon",
-          "meta": "@sys.ordinal",
+          "meta": "@sys.number",
           "userDefined": false
         }
       ],
@@ -29,21 +54,21 @@
       "id": "2d78d6cc-8429-4dec-8fdd-512437a40f62",
       "data": [
         {
-          "text": "Recieved location lat:"
+          "text": "Recieved location lat: "
         },
         {
           "text": "-98.759018",
           "alias": "lat",
-          "meta": "@sys.ordinal",
+          "meta": "@sys.number",
           "userDefined": false
         },
         {
-          "text": ", lon:"
+          "text": "  and lon: "
         },
         {
           "text": "23.3231006",
           "alias": "lon",
-          "meta": "@sys.ordinal",
+          "meta": "@sys.number",
           "userDefined": false
         }
       ],
@@ -54,22 +79,22 @@
       "id": "7cfc30ff-cc0d-421e-9b03-c7a8f99fc30a",
       "data": [
         {
-          "text": "Recieved location lat:"
+          "text": "Recieved location lat: "
         },
         {
           "text": "98.759018",
           "alias": "lat",
-          "meta": "@sys.ordinal",
+          "meta": "@sys.number",
           "userDefined": false
         },
         {
-          "text": ", lon:"
+          "text": " and lon: "
         },
         {
           "text": "23.3231006",
           "alias": "lon",
-          "meta": "@sys.ordinal",
-          "userDefined": false
+          "meta": "@sys.number",
+          "userDefined": true
         }
       ],
       "isTemplate": false,
@@ -79,21 +104,26 @@
       "id": "96c9ec54-e749-4103-bba4-db3d9779a2b1",
       "data": [
         {
-          "text": "Recieved location lat:"
+          "text": "Recieved",
+          "meta": "@sys.ignore",
+          "userDefined": true
+        },
+        {
+          "text": " location lat: "
         },
         {
           "text": "48.759018",
           "alias": "lat",
-          "meta": "@sys.ordinal",
+          "meta": "@sys.number",
           "userDefined": true
         },
         {
-          "text": ", lon:"
+          "text": " and lon: "
         },
         {
           "text": "2.531006",
           "alias": "lon",
-          "meta": "@sys.ordinal",
+          "meta": "@sys.number",
           "userDefined": true
         }
       ],
@@ -104,21 +134,21 @@
       "id": "6a3d30f2-5c11-4fbf-b79d-cba90d48795a",
       "data": [
         {
-          "text": "Recieved location lat:"
+          "text": "Recieved location lat: "
         },
         {
           "text": "40.71",
           "alias": "lat",
-          "meta": "@sys.ordinal",
+          "meta": "@sys.number",
           "userDefined": true
         },
         {
-          "text": ", lon:"
+          "text": " and lon: "
         },
         {
           "text": "-73.96",
           "alias": "lon",
-          "meta": "@sys.ordinal",
+          "meta": "@sys.number",
           "userDefined": true
         }
       ],
@@ -139,23 +169,28 @@
           "name": "SetLocationDefault",
           "parameters": {},
           "lifespan": 1
+        },
+        {
+          "name": "GetWeather",
+          "parameters": {},
+          "lifespan": 2
         }
       ],
       "parameters": [
         {
-          "required": false,
-          "dataType": "@sys.ordinal",
+          "required": true,
+          "dataType": "@sys.number",
           "name": "lat",
           "value": "$lat",
           "prompts": [],
-          "isList": false
+          "isList": true
         },
         {
-          "required": false,
-          "dataType": "@sys.ordinal",
+          "required": true,
+          "dataType": "@sys.number",
           "name": "lon",
           "value": "$lon",
-          "isList": false
+          "isList": true
         }
       ],
       "messages": [
